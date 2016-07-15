@@ -1,0 +1,7 @@
+#!/usr/bin/python
+import requests
+filename='test_file'
+f = open (filename)
+r =  requests.post(url='http://upload.example.com', data =  {'title':'test_file},  files =  {'file':f})
+print r.status_code
+print r.headers
