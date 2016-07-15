@@ -1,0 +1,15 @@
+#!/usr/bin/python
+import pycurl
+from cStringIO import StringIO
+filename='test_file'
+c = pycurl.Curl()
+c.setopt(c.POST, 1)
+c.setopt(c.HTTPPOST, [('title', 'test'), (('file', (c.FORM_FILE, filename)))])
+c.setopt(c.VERBOSE, 1)
+bodyOutput = StringIO()
+headersOutput = StringIO()
+c.setopt(c.WRITEFUNCTION, bodyOutput.write)
+c.setopt(c.URL, "http://upload.example.com" )
+c.setopt(c.HEADERFUNCTION, headersOutput.write)
+c.perform()
+print bodyOutput.getvalue()
